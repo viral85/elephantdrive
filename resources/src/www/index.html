@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>  	
+    <link href="3.0.20150505develop/edrive.css" rel="stylesheet" media="all">
+    <link href="3.0.20150505develop/partner.css" rel="stylesheet" media="all">
+    <title>ElephantDrive</title>    
+    <script src="3.0.20150505develop/jquery.min.js"></script>
+    <script src="3.0.20150505develop/properties.js"></script>
+    <script src="3.0.20150505develop/edrive.js"></script>
+  </head>
+  <body>
+
+    <div class="nas-apps-config-form-top">
+      <div class="nas-apps-config-form-app-logo"></div>
+      <div class="nas-apps-config-form-app-version">Version <span  id="version"></span></div>
+    </div>
+
+    <hr />
+
+    <div id="loginScreen" class="nas-apps-config-form-middle hide">        
+
+      <div id="loginAlert" class="nas-apps-config-form-message nas-apps-config-form-message-error hide">
+        Wrong username/password
+      </div>
+
+      <form id="loginForm" class="form-horizontal nas-apps-config-form-left">
+
+        <div class="nas-apps-config-form-field">
+          <label class="nas-apps-config-form-field-label" for="inputEmail">Email</label>      				
+          <input type="text" id="inputEmail" placeholder="Email">      				
+        </div>
+
+        <div class="nas-apps-config-form-field">
+          <label class="nas-apps-config-form-field-label" for="inputPassword">Password</label>      				
+          <input type="password" id="inputPassword" placeholder="Password">      				
+        </div>
+
+        <div class="nas-apps-config-form-field">
+          <button id="loginBtn" type="submit" class="nas-apps-config-form-button" style="width: 110px">Login</button>  
+        </div>
+
+      </form>
+
+      <div class="nas-apps-config-form-right">          
+        <div>
+          <a id="goToSignupBtn" href="#"><b>Sign Up</b></a>
+          <div class="nas-apps-config-form-link-info">Create a FREE ElephantDrive account if you don't have one.</div>
+        </div>
+
+        <div>
+          <a id="forgotPassBtn" href='#' >Forgot Password?</a>
+        </div>          
+        <br/>
+
+        <div>
+          <a class="nas-visit-ed-website" href="#" target="_blank">Visit ElephantDrive Website</a>
+        </div>          
+      </div>
+
+    </div>
+
+
+    <div id="loadingScreen" class="hide" style="text-align:center; margin: 60px 0 60px 0">      
+      <h4>
+        <span id="loadingMessage"></span> <span style="padding-left: 3px; padding-right: 3px;"></span> ...
+      </h4>
+      <br />
+      <div style="margin-top:6px"> <img src="3.0.20150505develop/ajax-loader.gif"> </div>
+    </div>
+
+
+    <div id="statusScreen" class="nas-apps-config-form-middle hide" style="text-align: center">
+
+      <div class=row>
+        <div id="statusAlert" class="nas-apps-config-form-message hide">
+          Successfully linked your ElephantDrive account with your <span class="nas-os-name">NAS App</span>!
+        </div>
+      </div>
+
+      <div class="row">
+        <h4>Logged in as <span class="nas-apps-config-form-auth-id" id="username"></span> (<a id="logoutBtn" style="text-decoration: underline" href="#">Log Out</a>) </h4>
+        <br/>
+        <button id="manageBackups" class="nas-apps-config-form-button" style="width: 220px">Manage Cloud Backup &raquo; </button>
+      </div>
+
+      <div class="row">     
+        <br/><br/><br/>
+        <a style="text-decoration: underline" target="_blank" class="nas-visit-ed-website-learn-more" href="#"><b>Learn more about ElephantDrive</b></a>     
+      </div>  
+
+      <div class="row">     
+        <br/><br/><br/>
+        <a id='logFileBtn' style="text-decoration: underline" target="_blank" href="#">View log file</a>     
+      </div>  
+
+    </div>
+
+    <div id="authNASScreen" class="nas-apps-config-form-middle hide">        
+      <h2>
+        <center>
+          Warning: This browser is not yet authorized to access application like ElephantDrive on your <span class="nas-os-name">NAS App</span>. <br/><br/>
+          Please <a id="loginToYourNAS" href='#'>login to your NAS</a> and then try again.
+        </center>
+      </h2>
+    </div>
+
+    <div id="signupScreen" class="nas-apps-config-form-middle hide">        
+
+      <div id="signupAlert" class="nas-apps-config-form-message nas-apps-config-form-message-error hide">
+        Wrong username/password
+      </div>
+
+      <form id="signupForm" class="form-horizontal nas-apps-config-form-left">
+
+        <div class="nas-apps-config-form-field">
+          <label class="nas-apps-config-form-field-label" for="inputEmailS">Email</label>              
+          <input type="text" id="inputEmailS" placeholder="Email">             
+        </div>
+
+        <div class="nas-apps-config-form-field">
+          <label class="nas-apps-config-form-field-label" for="inputPasswordS">Password</label>              
+          <input type="password" id="inputPasswordS" placeholder="Password">             
+        </div>
+
+        <div class="nas-apps-config-form-field">
+          <label class="nas-apps-config-form-field-label" for="inputPasswordConfirm">Confirm Password</label>              
+          <input type="password" id="inputPasswordConfirm" placeholder="Confirm Password">             
+        </div>
+
+        <div class="nas-apps-config-form-field">
+          <button id="signupBtn" type="submit" class="nas-apps-config-form-button" style="width: 110px">Signup</button>             
+        </div>
+
+      </form>
+
+      <div class="nas-apps-config-form-right">          
+        <div>            
+          <div class="nas-apps-config-form-link-info">
+            <b>You are signing up for a 50 GB ElephantDrive account FREE for 30 days!</b>
+          </div>
+        </div>
+
+        <div>
+          <a id="signupBackToLoginBtn" href="#">Back to login</a>
+        </div>          
+        <br/>
+        <div>
+          <a class="nas-visit-ed-website" href="#" target="_blank">Visit ElephantDrive Website</a>
+        </div>          
+      </div>
+
+    </div>
+
+
+    <div id="loginLoadingMessage" class="hide">Logging in </div>
+    <div id="signupLoadingMessage" class="hide">Creating new account & linking it with your <span class="nas-os-name">NAS App</span></div>
+    <div id="wrongLoginOrPasswordMessage" class="hide">Wrong username/password</div>
+    <div id="passwordDoNotMatchMessage" class="hide">Passwords do not match</div>
+    <div id="passwordLengthDoNotMatchMessage" class="hide">Password should be 6 or more characters long</div>
+    <hr />
+
+    <div class="nas-apps-config-form-bottom">
+      <div class="nas-apps-config-form-partner-logo"></div>
+    </div>
+
+  </body>
+</html>

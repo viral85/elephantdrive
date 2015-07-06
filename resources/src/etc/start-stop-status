@@ -1,0 +1,66 @@
+#!/bin/sh
+
+#Variables below set to default values
+CONFIG_DIR="/etc" #config file location
+VAR_DIR="/var/lib/elephantdrive" # location of runtime data
+TMP_DIR="/tmp/.vault" #tempporary data
+LOG_DIR="/var/log" # log location
+SMB_CONF_FILE="/etc/smb.conf" # samba config location to detect shares
+
+#export LD_LIBRARY_PATH="/var/packages/elephantdrive/target/lib"
+
+start_service ()
+{
+    if [ ! -f $CONFIG_DIR/elephantdrive.config ]; then
+			touch $CONFIG_DIR/elephantdrive.config
+			#Apache write permissions
+			chmod go+rw $CONFIG_DIR/elephantdrive.config
+		fi
+		# Launch the server in the background.
+    ${BASE}/bin/elephantdrive -D -c ${CONFIG_DIR} \
+    "MonitorConfigChanges=true" \
+    "VarDir=$VAR_DIR" \
+    "TmpDir=$TMP_DIR" \
+    "LogDir=$LOG_DIR" \
+		"SmbConfFile=$SMB_CONF_FILE"
+    return $?
+}
+
+stop_service ()
+{
+    # Kill elephantdriveDaemon
+    /bin/elephantdrive -K
+}
+
+status_service ()
+{
+    /bin/elephantdrive -S
+    return $?
+}
+
+case $1 in
+    start)
+        start_service
+        echo "Running ElephantDrive"
+        exit 0
+        ;;
+    stop)
+        stop_service
+        echo "Stopped ElephantDrive"
+        exit 0
+        ;;
+    status)
+				status_service
+        local sts=$?
+        if [ $sts -eq 0 ]; then
+            echo "ElephantDrive is running"
+        else
+            echo "ElephantDrive is not running"
+        fi
+        exit $sts
+        ;;
+    *)
+				echo "Usage: $0 [start|stop|status]"
+        exit 1
+        ;;
+esac
